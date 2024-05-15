@@ -1,4 +1,4 @@
-# Activity Portfolio
+# Exercise Portfolio
 
 This repository serves as a dynamic space on GitHub, created to host activities and exercises undertaken by me as part of my academic learning journey. This repository is a valuable source of material for students new to programming, offering a wide variety of disciplines and subjects.
 
