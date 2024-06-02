@@ -1,59 +1,36 @@
 #include <stdio.h>
 #include <string.h>
 
-// Função para inverter uma string
-void inverterString(char* str) {
-    int len = strlen(str);
-    for (int i = 0; i < len / 2; i++) {
-        char temp = str[i];
-        str[i] = str[len - i - 1];
-        str[len - i - 1] = temp;
-    }
-}
-
-// Função para verificar se um caractere é uma vogal
-int ehVogal(char c) {
-    char vogais[] = "AEIOUaeiou";
-    for (int i = 0; i < strlen(vogais); i++) {
-        if (c == vogais[i]) {
-            return 1;
-        }
-    }
-    return 0;
-}
-
-// Função para criptografar a frase
-void criptografarFrase(char* frase) {
-    // Inverter a frase
-    inverterString(frase);
-
-    // Substituir consoantes por #
-    for (int i = 0; i < strlen(frase); i++) {
-        char c = frase[i];
-        // Verificar se o caractere é uma letra e não é uma vogal
-        if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) {
-            if (!ehVogal(c)) {
-                frase[i] = '#';
-            }
-        }
-    }
-}
-
 int main() {
-    char frase[100];
+    char frase[100], frase_criptografada[100];
+    int i, j, len;
 
     // Solicitar a frase ao usuário
     printf("Digite uma frase: ");
     fgets(frase, sizeof(frase), stdin);
 
-    // Remover o caractere de nova linha do final da string, se existir
-    frase[strcspn(frase, "\n")] = '\0';
+    // Remover o caractere de nova linha do final da frase
+    frase[strcspn(frase, "\n")] = 0;
 
-    // Criptografar a frase
-    criptografarFrase(frase);
+    // Obter o comprimento da frase
+    len = strlen(frase);
 
-    // Imprimir a frase criptografada
-    printf("Frase criptografada: %s\n", frase);
+    // Inverter a frase e substituir consoantes por '#'
+    for (i = 0, j = len - 1; j >= 0; i++, j--) {
+        char c = frase[j];
+        if ((c >= 'B' && c <= 'D') || (c >= 'F' && c <= 'H') || (c >= 'J' && c <= 'N') ||
+            (c >= 'P' && c <= 'T') || (c >= 'V' && c <= 'Z') ||
+            (c >= 'b' && c <= 'd') || (c >= 'f' && c <= 'h') || (c >= 'j' && c <= 'n') ||
+            (c >= 'p' && c <= 't') || (c >= 'v' && c <= 'z')) {
+            frase_criptografada[i] = '#';
+        } else {
+            frase_criptografada[i] = c;
+        }
+    }
+    frase_criptografada[len] = '\0'; // Adicionar o terminador de string
+
+    // Exibir o resultado
+    printf("Frase criptografada: %s\n", frase_criptografada);
 
     return 0;
 }
