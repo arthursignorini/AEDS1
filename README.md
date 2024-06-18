@@ -1,5 +1,5 @@
-# Exercise Portfolio
+# Portfólio de Exercícios
 
-This repository serves as a dynamic space on GitHub, created to host activities and exercises undertaken by me as part of my academic learning journey. This repository is a valuable source of material for students new to programming, offering a wide variety of disciplines and subjects.
+Este repositório serve como um espaço dinâmico no GitHub, criado para hospedar atividades e exercícios realizados por mim como parte da minha jornada de aprendizado acadêmico. Este repositório é uma fonte valiosa de material para estudantes novos em programação, oferecendo uma grande variedade de disciplinas e assuntos.
 
-Within this repository, users can discover a wealth of content, ranging from simple programming exercises to slightly more complex ones, allowing observers to track my evolution over time. Each folder is meticulously organized according to academic disciplines, making it easy for users to navigate and explore materials relevant to their areas of interest.
+Dentro deste repositório, os usuários podem descobrir uma riqueza de conteúdo, desde exercícios simples de programação até alguns ligeiramente mais complexos, permitindo que os observadores acompanhem minha evolução ao longo do tempo. Cada pasta é meticulosamente organizada de acordo com disciplinas acadêmicas, tornando fácil para os usuários navegar e explorar materiais relevantes para suas áreas de interesse.
