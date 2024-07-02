@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int menu();
+int menu()
 double soma(double,double);
 double subtracao(double,double);
 double mult(double,double);
