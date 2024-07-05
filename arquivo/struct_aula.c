@@ -9,8 +9,8 @@ typedef struct {
     float salario;
 } Colaborador;
 
-void preencher(Colaborador colaborador[]) {
-    for (int i = 0; i < 5; i++) {
+void preencher(Colaborador colaborador[], int tam) {
+    for (int i = 0; i < tam; i++) {
         printf("COLABORADOR %d\n", i + 1);
         printf("Digite o nome do colaborador: ");
         scanf("%19s", colaborador[i].nome);
@@ -24,14 +24,13 @@ void preencher(Colaborador colaborador[]) {
     }
 }
 
-void gravar(Colaborador colaborador[]) {
-    FILE *arquivo;
-    arquivo = fopen("arquivo.txt", "w");
+void gravar(Colaborador colaborador[], int tam) {
+    FILE *arquivo = fopen("arquivo.txt", "w");
     if (arquivo == NULL) {
         printf("Erro ao abrir o arquivo!\n");
         return;
     }
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < tam; i++) {
         if (colaborador[i].codigo != -1) {
             fprintf(arquivo, "%s %d %s %.2f\n", colaborador[i].nome, colaborador[i].codigo, colaborador[i].email, colaborador[i].salario);
         }
@@ -39,28 +38,48 @@ void gravar(Colaborador colaborador[]) {
     fclose(arquivo);
 }
 
+void adicionar(int tam, int total, Colaborador colaborador[]) {
+    for (int i = tam; i < total; i++) {
+        printf("COLABORADOR %d\n", i + 1);
+        printf("Digite o nome do colaborador: ");
+        scanf("%19s", colaborador[i].nome);
+        printf("Digite o codigo desse colaborador: ");
+        scanf("%d", &colaborador[i].codigo);
+        printf("Digite o seu email: ");
+        scanf("%29s", colaborador[i].email);
+        printf("Digite o salario do colaborador: ");
+        scanf("%f", &colaborador[i].salario);
+        printf("\n");
+    }
+}
+
 int main() {
-    Colaborador colaborador[5];
-    for (int i = 0; i < 5; i++) {
+    int tam;
+    printf("Digite quantas pessoas voce quer armazenar: ");
+    scanf("%d", &tam);
+    Colaborador colaborador[tam];
+    for (int i = 0; i < tam; i++) {
         colaborador[i].codigo = -1;
     }
 
-    preencher(colaborador);
-    gravar(colaborador);
+    preencher(colaborador, tam);
+    gravar(colaborador, tam);
 
     int opcao;
 
     while (1) {
+        system("clear");
         printf("\nMenu:\n");
         printf("1. Alterar salario de colaborador\n");
         printf("2. Remover colaborador\n");
         printf("3. Pesquisar colaborador por nome e por codigo\n");
         printf("4. Imprimir soma de todos os salarios\n");
-        printf("5. Sair\n");
+        printf("5. Adicionar um novo colaborador\n");
+        printf("6. Sair\n");
         printf("Escolha uma opcao: ");
         scanf("%d", &opcao);
 
-        int x;
+        int x, total;
         char escolha[20];
         float soma = 0.0;
 
@@ -68,11 +87,11 @@ int main() {
             case 1:
                 printf("Digite o codigo do colaborador que voce quer mudar o salario: ");
                 scanf("%d", &x);
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < tam; i++) {
                     if (x == colaborador[i].codigo) {
                         printf("Digite o salario novo: ");
                         scanf("%f", &colaborador[i].salario);
-                        gravar(colaborador);
+                        gravar(colaborador, tam);
                         break;
                     }
                 }
@@ -80,10 +99,10 @@ int main() {
             case 2:
                 printf("Digite o codigo do colaborador que voce quer remover: ");
                 scanf("%d", &x);
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < tam; i++) {
                     if (x == colaborador[i].codigo) {
                         colaborador[i].codigo = -1;
-                        gravar(colaborador);
+                        gravar(colaborador, tam);
                         break;
                     }
                 }
@@ -93,7 +112,7 @@ int main() {
                 scanf("%d", &x);
                 printf("Digite o nome do colaborador que voce quer pesquisar: ");
                 scanf("%19s", escolha);
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < tam; i++) {
                     if (x == colaborador[i].codigo && strcmp(escolha, colaborador[i].nome) == 0) {
                         printf("Codigo: %d\n", colaborador[i].codigo);
                         printf("Nome: %s\n", colaborador[i].nome);
@@ -104,7 +123,7 @@ int main() {
                 }
                 break;
             case 4:
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < tam; i++) {
                     if (colaborador[i].codigo != -1) {
                         soma += colaborador[i].salario;
                     }
@@ -112,6 +131,14 @@ int main() {
                 printf("\nA soma de todos os salarios eh de %.2f\n", soma);
                 break;
             case 5:
+                printf("Digite quantos colaboradores voce quer adicionar: ");
+                scanf("%d", &x);
+                total = tam + x;
+                adicionar(tam, total, colaborador);
+                tam = total;
+                gravar(colaborador, tam);
+                break;
+            case 6:
                 return 0;
             default:
                 printf("Opção invalida.\n");
